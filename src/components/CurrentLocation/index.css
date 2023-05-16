@@ -6,7 +6,7 @@
     flex-direction: column;
     border: 1px solid black;
     margin: 40px 100px;
-    padding: 40px 20px;
+    padding: 0px 20px;
     background: white;
     border-radius: 12px;
 }
@@ -23,7 +23,9 @@
 
 .home-container {
     flex: 1;
-    
+    border-right: 1px solid black;
+    padding: 40px 0px;
+    padding-right: 20px;
 }
 
 .user-location-div {

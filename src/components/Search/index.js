@@ -9,12 +9,14 @@ const Search = () => {
     const [weather, setWeather] = useState({});
 
     function onSearch() {
+        console.log("dddd",query.current.value)
         axios
             .get(
-                `${apiKeys.base}weather?q=${query.current}&units=metric&APPID=${apiKeys.key}`
+                `${apiKeys.base}weather?q=${query.current.value}&units=metric&APPID=${apiKeys.key}`
             )
             .then((res) => {
                 setWeather(res.data);
+                console.log("devansh res",res)
             })
             .catch(function (err) {
                 console.log(err);
@@ -25,14 +27,14 @@ const Search = () => {
     return (
         <div className="search-container">
             Search bar
-            <div>
+            <div className="search-box">
                 <input
                     ref={query}
                     type="text"
                     className="search-input"
                     placeholder="Search city"
                 />
-                <SearchOutlined />
+                <SearchOutlined onClick={()=>{onSearch()}}/>
             </div>
         </div>
     );
