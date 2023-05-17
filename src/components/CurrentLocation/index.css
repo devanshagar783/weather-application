@@ -11,10 +11,6 @@
     border-radius: 12px;
 }
 
-.loader-container img {
-    height: 500px;
-}
-
 .main-container {
     width: 100%;
     display: flex;
@@ -55,4 +51,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.load-img{
+    height: 500px;
 }

@@ -104,7 +104,7 @@ const CurrentLocation = () => {
                 <>
                     {/* <div className="loader-container"> */}
 
-                    <img src={loading} alt="loading" />
+                    <img className="load-img" src={loading} alt="loading" />
                     <h2>Detecting your location</h2>
                     <p>
                         Please allow the application access to your location as
