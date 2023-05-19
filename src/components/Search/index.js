@@ -1,27 +1,16 @@
 import React, { useRef, useState } from "react";
-import axios from "axios";
-import apiKeys from "../../apiKeys.js";
 import "./index.css";
 import { SearchOutlined } from "@mui/icons-material";
+import { fetchLocation } from "../../utils";
 
 const Search = () => {
     const query = useRef("");
     const [weather, setWeather] = useState({});
 
-    function onSearch() {
-        console.log("dddd", query.current.value);
-        axios
-            .get(
-                `${apiKeys.base}weather?q=${query.current.value}&units=metric&APPID=${apiKeys.key}`
-            )
-            .then((res) => {
-                setWeather(res?.data);
-                console.log("devansh res", res);
-            })
-            .catch(function (err) {
-                console.log(err);
-                setWeather({});
-            });
+    const onSearch = async () => {
+        const searchv = await fetchLocation(query.current.value);
+        setWeather(searchv);
+        console.log("dev", searchv)
     }
 
     return (
@@ -50,6 +39,7 @@ const Search = () => {
                         <img
                             className="temp"
                             src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+                            alt=''
                         />
                     </li>
                     <li>
