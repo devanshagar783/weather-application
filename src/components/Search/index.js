@@ -1,16 +1,20 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./index.css";
 import { SearchOutlined } from "@mui/icons-material";
-import { fetchLocation } from "../../utils";
+import { fetchLocation, fetchLocationPic } from "../../utils";
+import { BgContext } from "../../context/context";
 
 const Search = () => {
     const query = useRef("");
     const [weather, setWeather] = useState({});
+    const bgCtx = useContext(BgContext);
+    const { onBgChange } = bgCtx;
 
     const onSearch = async () => {
         const search = await fetchLocation(query.current.value);
         setWeather(search);
-        console.log("dev", search)
+        const locPic = await fetchLocationPic(query.current.value);
+        onBgChange(locPic.results[0].urls.full);
     }
 
     return (

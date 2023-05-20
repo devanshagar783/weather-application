@@ -26,7 +26,15 @@ export const fetchForecast = async (lat, lon) => {
 
 export const fetchRandomPic = async () => {
     const apiCall = await fetch(
-        `${apiKeys.unsplash_base}/photos/random?client_id=${apiKeys.unsplash_access}`
+        `${apiKeys.unsplash_base}photos/random?client_id=${apiKeys.unsplash_access}`
+    );
+    const data = await apiCall.json();
+    return data;
+}
+
+export const fetchLocationPic = async (location) => {
+    const apiCall = await fetch(
+        `${apiKeys.unsplash_base}search/photos?query=${location}&client_id=${apiKeys.unsplash_access}&orientation=landscape`
     );
     const data = await apiCall.json();
     return data;
