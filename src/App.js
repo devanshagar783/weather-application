@@ -1,22 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CurrentLocation from "./components/CurrentLocation";
 import "./App.css";
 import Header from "./components/Header";
+import { fetchRandomPic } from "./utils";
 
 function App() {
+    const [bgImage, setBgImage] = useState(
+        "https://images.unsplash.com/photo-1504714146340-959ca07e1f38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80"
+    );
+
+    const getBg = async () => {
+        const bg = await fetchRandomPic();
+        console.log("img data", bg);
+        // setBgImage(bg.urls.full)
+    };
+
+    useEffect(() => {}, []);
+
     return (
         <div className="App">
+            <Header />
             <div className="main-data">
-                <Header />
-                <div className="content">
-                    <CurrentLocation />
-                </div>
+                <CurrentLocation />
             </div>
-            <img
-                className="backimg"
-                src="https://images.unsplash.com/photo-1601752874509-0e350467dc7b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0NTEwMjJ8MHwxfHNlYXJjaHwxfHxsdWNrbm93fGVufDB8fHx8MTY4NDU4NTkxOXww&ixlib=rb-4.0.3&q=85"
-                alt=""
-            />
+            <img className="backimg" src={bgImage} alt="" />
         </div>
     );
 }

@@ -21,7 +21,7 @@ const CurrentLocation = () => {
                     // );
                     // console.log("data obj1", apiCall);
                     // const data = await apiCall.json();
-                    const data = await fetchCurrLocation(position.coords)
+                    const data = await fetchCurrLocation(position.coords);
                     console.log("data obj2", data);
                     setLocalData({
                         lat: position.coords.latitude,
@@ -87,13 +87,19 @@ const CurrentLocation = () => {
     return (
         <>
             {loading && !localData?.celciusTemp ? (
-                <div className="loader-container">
-                    <img className="load-img" src={loadingImg} alt="loading" />
-                    <h2>Detecting your location</h2>
-                    <p>
-                        Please allow the application access to your location as
-                        it helps us in calculating real time weather
-                    </p>
+                <div className="loader-center">
+                    <div className="loader-container">
+                        <img
+                            className="load-img"
+                            src={loadingImg}
+                            alt="loading"
+                        />
+                        <h2>Detecting your location</h2>
+                        <p>
+                            Please allow the application access to your location
+                            as it helps us in calculating real time weather
+                        </p>
+                    </div>
                 </div>
             ) : (
                 <div className="main-container">

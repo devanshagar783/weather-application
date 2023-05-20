@@ -1,17 +1,27 @@
+.loader-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
 .loader-container {
     display: flex;
-    width: auto;
+    width: 500px;
     align-items: center;
     text-align: center;
     flex-direction: column;
     border: 1px solid black;
-    margin: 40px 100px;
     padding: 0px 20px 20px;
     border-radius: 12px;
-    background:-webkit-linear-gradient(348deg, rgba(22, 39, 44, 1) 0%, rgba(30, 59, 76, 1) 46%, rgba(26, 31, 38, 1) 100%);
+    background: -webkit-linear-gradient(
+        348deg,
+        rgba(22, 39, 44, 1) 0%,
+        rgba(30, 59, 76, 1) 46%,
+        rgba(26, 31, 38, 1) 100%
+    );
 }
 
-.load-img{
+.load-img {
     height: 300px;
 }
 
@@ -27,7 +37,13 @@
     border-right: 1px solid black;
     padding: 40px 10px;
     padding-right: 20px;
-    background:-webkit-linear-gradient(348deg, rgba(22, 39, 44, 1) 0%, rgba(30, 59, 76, 1) 46%, rgba(26, 31, 38, 1) 100%);
+    background: -webkit-linear-gradient(
+        348deg,
+        rgba(22, 39, 44, 1) 0%,
+        rgba(30, 59, 76, 1) 46%,
+        rgba(26, 31, 38, 1) 100%
+    );
+    opacity: 0.8;
 }
 
 .user-location-div {
@@ -42,7 +58,7 @@
     font-weight: bold;
 }
 
-.temp-container span{
+.temp-container span {
     font-size: 26px;
 }
 

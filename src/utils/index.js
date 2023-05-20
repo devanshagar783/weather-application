@@ -23,3 +23,11 @@ export const fetchForecast = async (lat, lon) => {
     const data = await apiCall.json();
     return data;
 };
+
+export const fetchRandomPic = async () => {
+    const apiCall = await fetch(
+        `${apiKeys.unsplash_base}/photos/random?client_id=${apiKeys.unsplash_access}`
+    );
+    const data = await apiCall.json();
+    return data;
+}
