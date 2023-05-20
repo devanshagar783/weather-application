@@ -5,12 +5,30 @@
 
 .App{
     position: absolute;
-    background: url("./assets/background-img.avif");
     height: 100vh;
     width: 100vw;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    color: white;
+    background: #0E100F;
+}
 
+.main-data{
+    position: inherit;
+    z-index: 10;
+    width: 100%;
+}
+
+.backimg{
+    position: absolute;
+    z-index: 0;
+    height: inherit;
+    width: inherit;
+    object-fit: cover;
+}
+
+.content{
+    padding: 40px;
 }

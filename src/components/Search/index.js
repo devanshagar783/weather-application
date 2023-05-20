@@ -8,9 +8,9 @@ const Search = () => {
     const [weather, setWeather] = useState({});
 
     const onSearch = async () => {
-        const searchv = await fetchLocation(query.current.value);
-        setWeather(searchv);
-        console.log("dev", searchv)
+        const search = await fetchLocation(query.current.value);
+        setWeather(search);
+        console.log("dev", search)
     }
 
     return (
@@ -38,7 +38,7 @@ const Search = () => {
                         </p>
                         <img
                             className="temp"
-                            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+                            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                             alt=''
                         />
                     </li>

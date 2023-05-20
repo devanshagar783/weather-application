@@ -1,25 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
-import apiKeys from "../../apiKeys.js";
+import React, { useEffect, useState } from "react";
 import ReactAnimatedWeather from "react-animated-weather";
-import loading from "../../assets/sunny_weather.gif";
+import loadingImg from "../../assets/loadingGif.gif";
 import "./index.css";
 import DateTime from "../DateTime/index.js";
 import Search from "../Search/index.js";
+import { fetchCurrLocation } from "../../utils/index.js";
 
 const CurrentLocation = () => {
+    const [loading, setLoading] = useState(true);
     const [localData, setLocalData] = useState({});
     const [weatherIcon, setWeatherIcon] = useState("");
 
-    console.log("dev data", localData, weatherIcon);
+    // console.log("dev data", localData, weatherIcon);
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
-                    const apiCall = await fetch(
-                        `${apiKeys.base}weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=${apiKeys.key}`
-                    );
-                    const data = await apiCall.json();
-                    console.log("data obj", data);
+                    // const apiCall = await fetch(
+                    //     `${apiKeys.base}weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=${apiKeys.key}`
+                    // );
+                    // console.log("data obj1", apiCall);
+                    // const data = await apiCall.json();
+                    const data = await fetchCurrLocation(position.coords)
+                    console.log("data obj2", data);
                     setLocalData({
                         lat: position.coords.latitude,
                         lon: position.coords.longitude,
@@ -31,7 +34,9 @@ const CurrentLocation = () => {
                         main: data.weather[0].main,
                         sunrise: data.sys.sunrise,
                         sunset: data.sys.sunset,
+                        icon: data.weather[0].icon,
                     });
+                    setLoading(false);
                     switch (data.weather[0].main) {
                         case "Haze":
                             setWeatherIcon("CLEAR_DAY");
@@ -63,6 +68,11 @@ const CurrentLocation = () => {
                         default:
                             setWeatherIcon("CLEAR_DAY");
                     }
+
+                    // const forecast = await fetchForecast(position.coords.latitude, position.coords.longitude)
+                    // console.log("forecst curr", forecast);
+                    // const fodata = forecast.json();
+                    // console.log("forecasr data f", fodata);
                 },
                 (err) => {
                     console.log("Error callback", err);
@@ -75,8 +85,17 @@ const CurrentLocation = () => {
     }, []);
 
     return (
-        <div className="loader-container">
-            {localData?.celciusTemp ? (
+        <>
+            {loading && !localData?.celciusTemp ? (
+                <div className="loader-container">
+                    <img className="load-img" src={loadingImg} alt="loading" />
+                    <h2>Detecting your location</h2>
+                    <p>
+                        Please allow the application access to your location as
+                        it helps us in calculating real time weather
+                    </p>
+                </div>
+            ) : (
                 <div className="main-container">
                     <div className="home-container">
                         <div className="temp-location">
@@ -94,27 +113,34 @@ const CurrentLocation = () => {
                             size={112}
                             animate={true}
                         />
+                        <img
+                            src={`https://openweathermap.org/img/wn/${localData.icon}@2x.png`}
+                            alt="weathericon"
+                        />
                         <div className="time-container">
                             <DateTime />
                         </div>
                     </div>
                     <Search />
                 </div>
-            ) : (
-                <>
-                    {/* <div className="loader-container"> */}
-
-                    <img className="load-img" src={loading} alt="loading" />
-                    <h2>Detecting your location</h2>
-                    <p>
-                        Please allow the application access to your location as
-                        it helps us in calculating real time weather
-                    </p>
-                </>
-                // {/* </div> */}
             )}
-        </div>
+            {/* </div> */}
+        </>
     );
 };
 
 export default CurrentLocation;
+
+//data i have from weather api
+// curr date
+// feels like
+// humidity
+// pressure
+// curr temp and max, min
+// wind speed and degree
+// sunrise and sunset
+// clouds
+// weather icon
+// visibility
+// minor weather description
+//
