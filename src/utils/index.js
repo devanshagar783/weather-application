@@ -24,6 +24,14 @@ export const fetchForecast = async (lat, lon) => {
     return data;
 };
 
+export const fetchAirPollution = async (lat, lon) => {
+    const apiCall = await fetch(
+        `${apiKeys.weather_base}air_pollution?lat=${lat}&lon=${lon}&appid=${apiKeys.weather_key}`
+    );
+    const data = await apiCall.json();
+    return data;
+}
+
 export const fetchRandomPic = async () => {
     const apiCall = await fetch(
         `${apiKeys.unsplash_base}photos/random?client_id=${apiKeys.unsplash_access}`

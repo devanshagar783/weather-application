@@ -16,11 +16,6 @@ const CurrentLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
-                    // const apiCall = await fetch(
-                    //     `${apiKeys.base}weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=${apiKeys.key}`
-                    // );
-                    // console.log("data obj1", apiCall);
-                    // const data = await apiCall.json();
                     const data = await fetchCurrLocation(position.coords);
                     console.log("data obj2", data);
                     setLocalData({
@@ -35,6 +30,7 @@ const CurrentLocation = () => {
                         sunrise: data.sys.sunrise,
                         sunset: data.sys.sunset,
                         icon: data.weather[0].icon,
+                        desc: data.weather[0].description,
                     });
                     setLoading(false);
                     switch (data.weather[0].main) {
@@ -104,30 +100,26 @@ const CurrentLocation = () => {
             ) : (
                 <div className="main-container">
                     <div className="home-container">
-                        <div className="temp-location">
+                        <h4>{localData.city}</h4>
+                        <div className="temperature">
                             <div className="temp-container">
                                 {localData.celciusTemp}°<span>C</span>
                             </div>
-                            <div className="user-location-div">
-                                <h2>{localData?.city}</h2>
-                                <h3>{localData?.country}</h3>
-                            </div>
+                            <img
+                                src={`https://openweathermap.org/img/wn/${localData.icon}@2x.png`}
+                                alt="weathericon"
+                            />
                         </div>
-                        <ReactAnimatedWeather
-                            icon={weatherIcon}
-                            color={"black"}
-                            size={112}
-                            animate={true}
-                        />
-                        <img
-                            src={`https://openweathermap.org/img/wn/${localData.icon}@2x.png`}
-                            alt="weathericon"
-                        />
+                        <p className="temp-desc">{localData.desc}</p>
                         <div className="time-container">
                             <DateTime />
                         </div>
+                        <div className="user-location-div">
+                            <h2>{localData?.city}</h2>
+                            <h3>{localData?.country}</h3>
+                        </div>
                     </div>
-                    <Search />
+                    {/* <Search /> */}
                 </div>
             )}
             {/* </div> */}
