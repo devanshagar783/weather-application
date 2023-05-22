@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ReactAnimatedWeather from "react-animated-weather";
 import loadingImg from "../../assets/loadingGif.gif";
 import "./index.css";
 import DateTime from "../DateTime/index.js";
-import Search from "../Search/index.js";
 import { fetchCurrLocation } from "../../utils/index.js";
+import {
+    LocationOnOutlined,
+} from "@mui/icons-material";
 
 const CurrentLocation = () => {
     const [loading, setLoading] = useState(true);
@@ -64,11 +65,6 @@ const CurrentLocation = () => {
                         default:
                             setWeatherIcon("CLEAR_DAY");
                     }
-
-                    // const forecast = await fetchForecast(position.coords.latitude, position.coords.longitude)
-                    // console.log("forecst curr", forecast);
-                    // const fodata = forecast.json();
-                    // console.log("forecasr data f", fodata);
                 },
                 (err) => {
                     console.log("Error callback", err);
@@ -111,18 +107,15 @@ const CurrentLocation = () => {
                             />
                         </div>
                         <p className="temp-desc">{localData.desc}</p>
-                        <div className="time-container">
-                            <DateTime />
-                        </div>
+                        <DateTime />
                         <div className="user-location-div">
-                            <h2>{localData?.city}</h2>
-                            <h3>{localData?.country}</h3>
+                            <LocationOnOutlined />
+                            <div>{localData?.city},</div>
+                            <div>{localData?.country}</div>
                         </div>
                     </div>
-                    {/* <Search /> */}
                 </div>
             )}
-            {/* </div> */}
         </>
     );
 };

@@ -1,8 +1,9 @@
+import { AccessTimeOutlined, CalendarTodayOutlined } from "@mui/icons-material";
 import React, { useRef } from "react";
 import Clock from "react-live-clock";
+import "./index.css"
 
 const DateTime = () => {
-    
     const date = useRef(new Date());
 
     const dateBuilder = (d) => {
@@ -40,8 +41,14 @@ const DateTime = () => {
 
     return (
         <>
-            <Clock format="HH:mm:ss" interval={1000} ticking />
-            <div>{dateBuilder(date.current)}</div>
+            <div className="datetime-div">
+                <AccessTimeOutlined />
+                <Clock format="HH:mm:ss" interval={1000} ticking />
+            </div>
+            <div className="datetime-div">
+                <CalendarTodayOutlined />
+                <div>{dateBuilder(date.current)}</div>
+            </div>
         </>
     );
 };
