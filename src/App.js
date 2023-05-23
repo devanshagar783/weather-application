@@ -2,12 +2,12 @@ import React from "react";
 import CurrentLocation from "./components/CurrentLocation";
 import "./App.css";
 import Header from "./components/Header";
-import { BgContextProvider } from "./context/context";
+import { AppContextProvider } from "./context/context";
 import BackgroundImage from "./components/BackgroundImage";
 
 function App() {
     return (
-        <BgContextProvider>
+        <AppContextProvider>
             <div className="App">
                 <Header />
                 <div className="main-data">
@@ -15,7 +15,7 @@ function App() {
                 </div>
                 <BackgroundImage />
             </div>
-        </BgContextProvider>
+        </AppContextProvider>
     );
 }
 

@@ -18,7 +18,7 @@ export const fetchLocation = async (location = "") => {
 
 export const fetchForecast = async (lat, lon) => {
     const apiCall = await fetch(
-        `${apiKeys.weather_base}forecast?lat=${lat}&lon=${lon}&APPID=${apiKeys.weather_key}`
+        `${apiKeys.weather_base}forecast?lat=${lat}&lon=${lon}&units=metric&APPID=${apiKeys.weather_key}`
     );
     const data = await apiCall.json();
     return data;

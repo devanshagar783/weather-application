@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import loadingImg from "../../assets/loadingGif.gif";
 import "./index.css";
 import DateTime from "../DateTime/index.js";
@@ -6,19 +6,24 @@ import { fetchCurrLocation } from "../../utils/index.js";
 import {
     LocationOnOutlined,
 } from "@mui/icons-material";
+import Forecast from "../Forecast";
+import { AppContext } from "../../context/context";
 
 const CurrentLocation = () => {
     const [loading, setLoading] = useState(true);
     const [localData, setLocalData] = useState({});
     const [weatherIcon, setWeatherIcon] = useState("");
+    const appContext = useContext(AppContext);
+    const { onLocationChange } = appContext;
 
     // console.log("dev data", localData, weatherIcon);
     useEffect(() => {
+        console.trace("devansh trace")
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
                     const data = await fetchCurrLocation(position.coords);
-                    console.log("data obj2", data);
+                    // console.log("data obj2", data);
                     setLocalData({
                         lat: position.coords.latitude,
                         lon: position.coords.longitude,
@@ -33,6 +38,7 @@ const CurrentLocation = () => {
                         icon: data.weather[0].icon,
                         desc: data.weather[0].description,
                     });
+                    onLocationChange(position.coords.latitude, position.coords.longitude);
                     setLoading(false);
                     switch (data.weather[0].main) {
                         case "Haze":
@@ -114,6 +120,7 @@ const CurrentLocation = () => {
                             <div>{localData?.country}</div>
                         </div>
                     </div>
+                    <Forecast />
                 </div>
             )}
         </>

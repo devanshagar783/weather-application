@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { BgContext } from "../../context/context";
+import { AppContext } from "../../context/context";
 import './index.css'
 
 const BackgroundImage = () => {
-    const bgCtx = useContext(BgContext);
-    const { bgImage } = bgCtx;
+    const AppCtx = useContext(AppContext);
+    const { bgImage } = AppCtx;
     return (
         <div className="bg-container">
             <img className="backimg" src={bgImage} alt="" />
