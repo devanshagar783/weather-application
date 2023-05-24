@@ -22,7 +22,9 @@ const Forecast = () => {
             5 Days Forecast
             <div className="home-container">
                 {forecastItems && forecastItems.map((item, index) => {
-                    return <ForecastItem item={item} key={index} />;
+                    if(index % 8 === 0)
+                        return <ForecastItem item={item} key={index} />;
+                    return "";
                 })}
             </div>
         </div>

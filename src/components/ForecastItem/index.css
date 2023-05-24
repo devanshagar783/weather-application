@@ -1,0 +1,38 @@
+.forecast-item{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.forecast-item-image{
+    width: 50px;
+}
+
+.forecast-date{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.forecast-minmax{
+    display: flex;
+    /* gap: 5px; */
+    align-items: center;
+    /* width: 135px; */
+    align-self: center;
+}
+
+.forecast-max-temp{
+    font-size: 20px;
+    align-self: flex-start;
+}
+
+.slash{
+    font-size: 25px;
+}
+
+.forecast-min-temp{
+    font-size: 15px;
+}

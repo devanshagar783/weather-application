@@ -13,8 +13,7 @@ const Search = () => {
     const onSearch = async () => {
         const search = await fetchLocation(query.current.value);
         setWeather(search);
-        const locPic = await fetchLocationPic(query.current.value);
-        onBgChange(locPic.results[0].urls.full);
+        onBgChange(query.current.value);
     }
 
     return (

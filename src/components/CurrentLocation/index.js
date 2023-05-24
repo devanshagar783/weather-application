@@ -12,13 +12,12 @@ import { AppContext } from "../../context/context";
 const CurrentLocation = () => {
     const [loading, setLoading] = useState(true);
     const [localData, setLocalData] = useState({});
-    const [weatherIcon, setWeatherIcon] = useState("");
+    // const [weatherIcon, setWeatherIcon] = useState("");
     const appContext = useContext(AppContext);
-    const { onLocationChange } = appContext;
+    const { onLocationChange, onBgChange } = appContext;
 
     // console.log("dev data", localData, weatherIcon);
     useEffect(() => {
-        console.trace("devansh trace")
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
@@ -38,39 +37,40 @@ const CurrentLocation = () => {
                         icon: data.weather[0].icon,
                         desc: data.weather[0].description,
                     });
+                    onBgChange(data.name);
                     onLocationChange(position.coords.latitude, position.coords.longitude);
                     setLoading(false);
-                    switch (data.weather[0].main) {
-                        case "Haze":
-                            setWeatherIcon("CLEAR_DAY");
-                            break;
-                        case "Clouds":
-                            setWeatherIcon("CLOUDY");
-                            break;
-                        case "Rain":
-                            setWeatherIcon("RAIN");
-                            break;
-                        case "Snow":
-                            setWeatherIcon("SNOW");
-                            break;
-                        case "Dust":
-                            setWeatherIcon("WIND");
-                            break;
-                        case "Drizzle":
-                            setWeatherIcon("SLEET");
-                            break;
-                        case "Fog":
-                            setWeatherIcon("FOG");
-                            break;
-                        case "Smoke":
-                            setWeatherIcon("FOG");
-                            break;
-                        case "Tornado":
-                            setWeatherIcon("WIND");
-                            break;
-                        default:
-                            setWeatherIcon("CLEAR_DAY");
-                    }
+                    // switch (data.weather[0].main) {
+                    //     case "Haze":
+                    //         setWeatherIcon("CLEAR_DAY");
+                    //         break;
+                    //     case "Clouds":
+                    //         setWeatherIcon("CLOUDY");
+                    //         break;
+                    //     case "Rain":
+                    //         setWeatherIcon("RAIN");
+                    //         break;
+                    //     case "Snow":
+                    //         setWeatherIcon("SNOW");
+                    //         break;
+                    //     case "Dust":
+                    //         setWeatherIcon("WIND");
+                    //         break;
+                    //     case "Drizzle":
+                    //         setWeatherIcon("SLEET");
+                    //         break;
+                    //     case "Fog":
+                    //         setWeatherIcon("FOG");
+                    //         break;
+                    //     case "Smoke":
+                    //         setWeatherIcon("FOG");
+                    //         break;
+                    //     case "Tornado":
+                    //         setWeatherIcon("WIND");
+                    //         break;
+                    //     default:
+                    //         setWeatherIcon("CLEAR_DAY");
+                    // }
                 },
                 (err) => {
                     console.log("Error callback", err);
@@ -80,7 +80,7 @@ const CurrentLocation = () => {
                 }
             );
         }
-    }, []);
+    });
 
     return (
         <>
