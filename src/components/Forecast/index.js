@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ForecastItem from "../ForecastItem";
 import { AppContext } from "../../context/context";
 import { fetchForecast } from "../../utils";
+import "./index.css"
 
 const Forecast = () => {
     const [forecastItems, setForecastItems] = useState([]);
@@ -19,7 +20,7 @@ const Forecast = () => {
     }, [location.lat, location.lon]);
     return (
         <div>
-            5 Days Forecast
+            <p className="forecast-text">5 Days Forecast</p>
             <div className="home-container">
                 {forecastItems && forecastItems.map((item, index) => {
                     if(index % 8 === 0)

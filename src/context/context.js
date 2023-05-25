@@ -14,7 +14,7 @@ export const AppContextProvider = ({children}) => {
 
     const handleBgChange = async (location) => {
         let data = await fetchLocationPic(location)
-        setBgImage(data.results[0].urls.full);
+        setBgImage(data?.results[Math.floor(Math.random() * data?.results?.length)]?.urls?.full);
     }
 
     const handleLocationChange = (lat, lon) => {
