@@ -3,10 +3,9 @@ import loadingImg from "../../assets/loadingGif.gif";
 import "./index.css";
 import DateTime from "../DateTime/index.js";
 import { fetchCurrLocation } from "../../utils/index.js";
-import {
-    LocationOnOutlined,
-} from "@mui/icons-material";
+import { LocationOnOutlined } from "@mui/icons-material";
 import Forecast from "../Forecast";
+import Info from "../Info";
 import { AppContext } from "../../context/context";
 
 const CurrentLocation = () => {
@@ -28,17 +27,26 @@ const CurrentLocation = () => {
                         lon: position.coords.longitude,
                         city: data.name,
                         country: data.sys.country,
-                        celciusTemp: data.main.temp,
-                        farenheitTemp: data.main.temp * 1.8 + 32,
-                        humidity: data.main.humidity,
-                        main: data.weather[0].main,
                         sunrise: data.sys.sunrise,
                         sunset: data.sys.sunset,
+                        celciusTemp: data.main.temp,
+                        farenheitTemp: data.main.temp * 1.8 + 32,
+                        feelsLike: data.main.feels_like,
+                        humidity: data.main.humidity,
+                        main: data.weather[0].main,
                         icon: data.weather[0].icon,
                         desc: data.weather[0].description,
+                        windSpeed: data.wind.speed,
+                        windDeg: data.wind.deg,
+                        visibility: data.visibility,
+                        pressure: data.main.pressure,
+                        clouds: data.clouds.all,
                     });
                     onBgChange(data.name);
-                    onLocationChange(position.coords.latitude, position.coords.longitude);
+                    onLocationChange(
+                        position.coords.latitude,
+                        position.coords.longitude
+                    );
                     setLoading(false);
                     // switch (data.weather[0].main) {
                     //     case "Haze":
@@ -101,26 +109,31 @@ const CurrentLocation = () => {
                 </div>
             ) : (
                 <div className="main-container">
-                    <div className="home-container">
-                        <h4>{localData.city}</h4>
-                        <div className="temperature">
-                            <div className="temp-container">
-                                {localData.celciusTemp}°<span>C</span>
+                    <div className="forecast-resp">
+                        <div className="home-container">
+                            <h4>{localData.city}</h4>
+                            <div className="temperature">
+                                <div className="temp-container">
+                                    {localData.celciusTemp}°<span>C</span>
+                                </div>
+                                <img
+                                    src={`https://openweathermap.org/img/wn/${localData.icon}@2x.png`}
+                                    alt="weathericon"
+                                />
                             </div>
-                            <img
-                                src={`https://openweathermap.org/img/wn/${localData.icon}@2x.png`}
-                                alt="weathericon"
-                            />
+                            <p className="temp-desc">{localData.desc}</p>
+                            <DateTime />
+                            <div className="user-location-div">
+                                <LocationOnOutlined />
+                                <div>{localData?.city},</div>
+                                <div>{localData?.country}</div>
+                            </div>
                         </div>
-                        <p className="temp-desc">{localData.desc}</p>
-                        <DateTime />
-                        <div className="user-location-div">
-                            <LocationOnOutlined />
-                            <div>{localData?.city},</div>
-                            <div>{localData?.country}</div>
-                        </div>
+                        <Forecast />
                     </div>
-                    <Forecast />
+                    <div>
+                        <Info data={localData}/>
+                    </div>
                 </div>
             )}
         </>

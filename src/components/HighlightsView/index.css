@@ -1,0 +1,11 @@
+.highlight-item{
+    border: 1px solid black;
+    background: -webkit-linear-gradient(
+        348deg,
+        rgba(22, 39, 44, 1) 0%,
+        rgba(30, 59, 76, 1) 46%,
+        rgba(26, 31, 38, 1) 100%
+    );
+    opacity: 0.4;
+    padding: 20px;
+}

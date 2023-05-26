@@ -27,9 +27,16 @@
 
 .main-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px;
     padding: 100px 40px;
+}
+
+.forecast-resp{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* padding: 100px 40px; */
 }
 
 .home-container {
