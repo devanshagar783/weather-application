@@ -1,0 +1,9 @@
+.forecast-2row{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.info-container{
+    width: auto;
+}
