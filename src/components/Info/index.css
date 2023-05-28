@@ -1,7 +1,8 @@
-.forecast-2row{
+.forecast-row{
     display: flex;
     flex-direction: row;
     gap: 20px;
+    margin-bottom: 20px;
 }
 
 .info-container{

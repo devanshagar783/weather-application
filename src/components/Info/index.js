@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 import HighlightsView from "../HighlightsView";
 import HumidityIcon from "../../assets/humidity.svg";
 import feelsLikeIcon from "../../assets/feelsLike.svg";
 import pressureIcon from "../../assets/pressure.svg";
 import visibilityIcon from "../../assets/visibility.svg";
+import aqiIcon from "../../assets/aqiIcon.svg";
+import { fetchAirPollution } from "../../utils";
+import { useState } from "react";
 
 const Info = ({ data }) => {
     const {
@@ -19,6 +22,8 @@ const Info = ({ data }) => {
         visibility,
         clouds,
     } = data;
+
+    const [aqi, setAqi] = useState({});
     console.log("dev data", data);
 
     const humidityData = {
@@ -46,11 +51,62 @@ const Info = ({ data }) => {
         unit: "km",
     };
 
+    const aqiData = {
+        title: "Air Quality Index",
+        icon: aqiIcon,
+        aqi: aqi?.main?.aqi,
+        items: [
+            {
+                title: "PM2.5",
+                value: aqi?.components?.pm2_5,
+            },
+            {
+                title: "SO2",
+                value: aqi?.components?.so2
+            },
+            {
+                title: "NO2",
+                value: aqi?.components?.no2
+            },
+            {
+                title: "O3",
+                value: aqi?.components?.o3
+            },
+        ]
+    }
+    const sunData = {
+        title: "Sunrise & Sunset",
+        items: [
+            {
+                title: "Sunrise",
+                value: sunrise,
+                icon: "",
+            },
+            {
+                title: "Sunset",
+                value: sunset,
+                icon: "",
+            },
+        ],
+    }
+
+    useEffect(()=>{
+        async function fetchAqi(){
+            const aqiFetchData = await fetchAirPollution(lat, lon);
+            setAqi(aqiFetchData?.list[0])
+            console.log("aqui fetch", aqiFetchData.list[0])
+        }
+        fetchAqi()
+    },[])
+
     return (
         <div className="home-container info-container">
             <p className="forecast-text">Todays Highlights</p>
-            <div></div>
-            <div className="forecast-2row">
+            <div className="forecast-row">
+                <HighlightsView data={aqiData} />
+                <HighlightsView data={sunData} />
+            </div>
+            <div className="forecast-row">
                 <HighlightsView data={humidityData} />
                 <HighlightsView data={pressureData} />
                 <HighlightsView data={visibilityData} />
