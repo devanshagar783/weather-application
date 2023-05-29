@@ -1,8 +1,15 @@
-.forecast-row{
+.forecast-grow, .forecast-row{
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 20px;
     margin-bottom: 20px;
+}
+
+.forecast-grow{
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: unset;
 }
 
 .info-container{
