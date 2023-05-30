@@ -81,12 +81,12 @@ const Info = ({ data }) => {
         items: [
             {
                 title: "Sunrise",
-                value: sunrise,
+                value: new Date(sunrise*1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
                 icon: sun,
             },
             {
                 title: "Sunset",
-                value: sunset,
+                value: new Date(sunset*1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
                 icon: moon,
             },
         ],

@@ -72,3 +72,11 @@
     border-radius: 8px;
     color: black;
 }
+
+.highlight-noicon{
+    margin-left: unset;
+}
+
+.highlight-item-img{
+    margin-right: 10px;
+}

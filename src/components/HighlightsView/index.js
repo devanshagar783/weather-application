@@ -11,10 +11,10 @@ const HighlightsView = ({ data }) => {
             <div className="highlight-subtext">
                 <img src={data?.icon} />
                 {data?.items?.length > 0 ? (
-                    <div className="highlight-list">
+                    <div className={`highlight-list ${data?.icon ? "": "highlight-noicon"}`}>
                         {data?.items?.map((item, index) => (
                             <div key={index} className="highlight-items">
-                                <img src={item?.icon} />
+                                {item?.icon && <img className="highlight-item-img" src={item?.icon} />}
                                 <div className="highlight-subitems">
                                     <p className="multi-item-title">
                                         {item.title}
