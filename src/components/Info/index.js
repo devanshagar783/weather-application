@@ -10,6 +10,9 @@ import sun from "../../assets/sun.svg";
 import moon from "../../assets/moon.svg";
 import { fetchAirPollution } from "../../utils";
 import { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../../context/context";
+import ForecastData from "../ForecastData";
 
 const Info = ({ data }) => {
     const {
@@ -26,7 +29,8 @@ const Info = ({ data }) => {
     } = data;
 
     const [aqi, setAqi] = useState({});
-    console.log("dev data", data);
+    const appContext = useContext(AppContext);
+    const { forecastItems } = appContext;
 
     const humidityData = {
         title: "Humidity",
@@ -81,12 +85,18 @@ const Info = ({ data }) => {
         items: [
             {
                 title: "Sunrise",
-                value: new Date(sunrise*1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+                value: new Date(sunrise * 1000).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                }),
                 icon: sun,
             },
             {
                 title: "Sunset",
-                value: new Date(sunset*1000).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}),
+                value: new Date(sunset * 1000).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                }),
                 icon: moon,
             },
         ],
@@ -102,21 +112,28 @@ const Info = ({ data }) => {
     }, []);
 
     return (
-        <div className="home-container info-container">
-            <p className="forecast-text">Todays Highlights</p>
-            <div className="forecast-row">
-                <HighlightsView data={aqiData} />
-                <HighlightsView data={sunData} />
+        <div >
+            <div className="home-container info-container">
+                <p className="forecast-text">Todays Highlights</p>
+                <div className="forecast-row">
+                    <HighlightsView data={aqiData} />
+                    <HighlightsView data={sunData} />
+                </div>
+                <div className="forecast-row">
+                    <div className="forecast-grow">
+                        <HighlightsView data={humidityData} />
+                        <HighlightsView data={pressureData} />
+                    </div>
+                    <div className="forecast-grow">
+                        <HighlightsView data={visibilityData} />
+                        <HighlightsView data={feelsLikeData} />
+                    </div>
+                </div>
             </div>
-            <div className="forecast-row">
-                <div className="forecast-grow">
-                    <HighlightsView data={humidityData} />
-                    <HighlightsView data={pressureData} />
-                </div>
-                <div className="forecast-grow">
-                    <HighlightsView data={visibilityData} />
-                    <HighlightsView data={feelsLikeData} />
-                </div>
+            <div className="home-container info-container">Today at
+            {forecastItems && forecastItems.map((item, index)=>{
+                return <ForecastData data={item} key={index} />
+            })}
             </div>
         </div>
     );

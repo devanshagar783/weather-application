@@ -33,7 +33,6 @@ const ForecastItem = ({ item }) => {
         "November",
         "December",
     ];
-    // console.log("dd", new Date(dt*1000))
     const date = new Date(dt * 1000);
 
     return (

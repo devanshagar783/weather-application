@@ -5,16 +5,13 @@ import { fetchForecast } from "../../utils";
 import "./index.css"
 
 const Forecast = () => {
-    const [forecastItems, setForecastItems] = useState([]);
     const appContext = useContext(AppContext);
-    const { location } = appContext;
+    const { location, onForecastItemsChange, forecastItems } = appContext;
 
     useEffect(() => {
         async function fetchData(){
-
             const data = await fetchForecast(location.lat, location.lon);
-            // console.log("devansh res", data);
-            setForecastItems(data?.list)
+            onForecastItemsChange(data?.list);
         }
         fetchData();
     }, [location.lat, location.lon]);
