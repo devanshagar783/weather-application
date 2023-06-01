@@ -3,9 +3,11 @@ import "./index.css"
 
 const ForecastData = ({data}) => {
     console.log("forecast dataaaa", data)
+
   return (
-    <div>
-      
+    <div classname="">
+      <p>Temperature: {data?.main?.temp}</p>
+      <p>Time: {data?.dt_txt}</p>
     </div>
   )
 }

@@ -132,6 +132,7 @@ const Info = ({ data }) => {
             </div>
             <div className="home-container info-container">Today at
             {forecastItems && forecastItems.map((item, index)=>{
+                if(index < 8)
                 return <ForecastData data={item} key={index} />
             })}
             </div>
