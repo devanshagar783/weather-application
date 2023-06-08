@@ -13,7 +13,7 @@ function App() {
                 <div className="main-data">
                     <CurrentLocation />
                 </div>
-                <BackgroundImage />
+                {/* <BackgroundImage /> */}
             </div>
         </AppContextProvider>
     );

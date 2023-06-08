@@ -130,11 +130,15 @@ const Info = ({ data }) => {
                     </div>
                 </div>
             </div>
-            <div className="home-container info-container">Today at
-            {forecastItems && forecastItems.map((item, index)=>{
-                if(index < 8)
-                return <ForecastData data={item} key={index} />
-            })}
+            <br />
+            <div>
+                <p className="forecast-text">Today at</p>
+                <div className="home-container info-container forecast-container">
+                {forecastItems && forecastItems.map((item, index)=>{
+                    if(index < 8)
+                    return <ForecastData data={item} key={index} />
+                })}
+                </div>
             </div>
         </div>
     );

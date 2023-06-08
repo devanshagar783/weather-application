@@ -1,13 +1,8 @@
 .highlight-item{
     flex: 1;
     min-width: 150px;
-    border: 1px solid black;
-    background: -webkit-linear-gradient(
-        348deg,
-        rgba(22, 39, 44, 1) 0%,
-        rgba(30, 59, 76, 1) 46%,
-        rgba(26, 31, 38, 1) 100%
-    );
+    /* border: 1px solid black; */
+    background: #262626;
     padding: 15px;
     /* opacity: 0.4; */
     border-radius: 24px;

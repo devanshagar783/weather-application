@@ -13,7 +13,7 @@ const CurrentLocation = () => {
     const [localData, setLocalData] = useState({});
     // const [weatherIcon, setWeatherIcon] = useState("");
     const appContext = useContext(AppContext);
-    const { onLocationChange, onBgChange } = appContext;
+    const { onLocationChange } = appContext;
 
     // console.log("dev data", localData, weatherIcon);
     useEffect(() => {
@@ -42,7 +42,7 @@ const CurrentLocation = () => {
                         pressure: data.main.pressure,
                         clouds: data.clouds.all,
                     });
-                    onBgChange(data.name);
+                    // onBgChange(data.name);
                     onLocationChange(
                         position.coords.latitude,
                         position.coords.longitude

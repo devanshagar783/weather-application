@@ -13,12 +13,7 @@
     border: 1px solid black;
     padding: 0px 20px 20px;
     border-radius: 12px;
-    background: -webkit-linear-gradient(
-        348deg,
-        rgba(22, 39, 44, 1) 0%,
-        rgba(30, 59, 76, 1) 46%,
-        rgba(26, 31, 38, 1) 100%
-    );
+    background: #1c1c1c;
 }
 
 .load-img {
@@ -42,16 +37,11 @@
 .home-container {
     /* flex: 1; */
     width: 300px;
-    border-right: 1px solid black;
+    /* border-right: 1px solid black; */
     /* padding: 40px 10px; */
     padding: 20px;
     border-radius: 20px;
-    background: -webkit-linear-gradient(
-        348deg,
-        rgba(22, 39, 44, 1) 0%,
-        rgba(30, 59, 76, 1) 46%,
-        rgba(26, 31, 38, 1) 100%
-    );
+    background: #1c1c1c;
     opacity: 0.8;
 }
 
@@ -80,7 +70,9 @@
 
 .temperature{
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
 }
 

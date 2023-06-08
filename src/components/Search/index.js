@@ -8,12 +8,12 @@ const Search = () => {
     const query = useRef("");
     const [weather, setWeather] = useState({});
     const AppCtx = useContext(AppContext);
-    const { onBgChange } = AppCtx;
+    // const { onBgChange } = AppCtx;
 
     const onSearch = async () => {
         const search = await fetchLocation(query.current.value);
         setWeather(search);
-        onBgChange(query.current.value);
+        // onBgChange(query.current.value);
     }
 
     return (
