@@ -16,7 +16,7 @@ const ForecastData = ({data}) => {
   return (
     <div className="forecast-data-item">
       <p>{getime(data?.dt)}</p>
-      <img className='forecast-image' src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}/>
+      <img className='forecast-image' src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt=""/>
       <p>{data?.main?.temp}°<span>C</span></p>
     </div>
   )

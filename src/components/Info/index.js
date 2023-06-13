@@ -16,7 +16,7 @@ import ForecastData from "../ForecastData";
 
 const Info = ({ data }) => {
     const {
-        city,
+        // city,
         sunrise,
         sunset,
         lat,
@@ -25,7 +25,7 @@ const Info = ({ data }) => {
         feelsLike,
         pressure,
         visibility,
-        clouds,
+        // clouds,
     } = data;
 
     const [aqi, setAqi] = useState({});
@@ -109,7 +109,7 @@ const Info = ({ data }) => {
             console.log("aqui fetch", aqiFetchData.list[0]);
         }
         fetchAqi();
-    }, []);
+    }, [lat, lon]);
 
     return (
         <div >
@@ -136,7 +136,8 @@ const Info = ({ data }) => {
                 <div className="home-container info-container forecast-container">
                 {forecastItems && forecastItems.map((item, index)=>{
                     if(index < 8)
-                    return <ForecastData data={item} key={index} />
+                        return <ForecastData data={item} key={index} />
+                    return ""
                 })}
                 </div>
             </div>

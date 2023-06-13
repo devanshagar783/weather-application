@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { fetchLocationPic } from "../utils";
+// import { fetchLocationPic } from "../utils";
 
 export const AppContext = createContext({
     // bgImage: '',
