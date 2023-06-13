@@ -18,7 +18,7 @@ const Forecast = () => {
     return (
         <div>
             <p className="forecast-text">5 Days Forecast</p>
-            <div className="home-container">
+            <div className="home-container forecast-padding">
                 {forecastItems && forecastItems.map((item, index) => {
                     if(index % 8 === 0)
                         return <ForecastItem item={item} key={index} />;

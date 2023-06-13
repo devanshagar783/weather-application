@@ -26,7 +26,7 @@ const Search = () => {
                     className="search-input"
                     placeholder="Search city"
                 />
-                <SearchOutlined
+                <SearchOutlined className="search-btn"
                     onClick={() => {
                         onSearch();
                     }}
