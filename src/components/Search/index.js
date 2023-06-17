@@ -1,24 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useContext } from "react";
 import "./index.css";
 import { SearchOutlined } from "@mui/icons-material";
 import { fetchLocation } from "../../utils";
-// import { AppContext } from "../../context/context";
+import { AppContext } from "../../context/context";
 
 const Search = () => {
     const query = useRef("");
-    // const [weather, setWeather] = useState({});
-    // const AppCtx = useContext(AppContext);
-    // const { onBgChange } = AppCtx;
+    const AppCtx = useContext(AppContext);
+    const { onLocationChange } = AppCtx;
 
     const onSearch = async () => {
         const search = await fetchLocation(query.current.value);
-        // setWeather(search);
-        // onBgChange(query.current.value);
+        onLocationChange(search?.coord.lat, search?.coord?.lon)
     }
 
     return (
         <div className="search-container">
-            {/* Search bar */}
             <div className="search-box">
                 <input
                     ref={query}

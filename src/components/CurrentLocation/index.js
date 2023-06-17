@@ -13,72 +13,19 @@ const CurrentLocation = () => {
     const [localData, setLocalData] = useState({});
     // const [weatherIcon, setWeatherIcon] = useState("");
     const appContext = useContext(AppContext);
-    const { onLocationChange } = appContext;
+    const { onLocationChange, location } = appContext;
 
-    // console.log("dev data", localData, weatherIcon);
+    // console.log("dev data", location);
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
-                    const data = await fetchCurrLocation(position.coords);
-                    // console.log("data obj2", data);
-                    setLocalData({
-                        lat: position.coords.latitude,
-                        lon: position.coords.longitude,
-                        city: data.name,
-                        country: data.sys.country,
-                        sunrise: data.sys.sunrise,
-                        sunset: data.sys.sunset,
-                        celciusTemp: data.main.temp,
-                        farenheitTemp: data.main.temp * 1.8 + 32,
-                        feelsLike: data.main.feels_like,
-                        humidity: data.main.humidity,
-                        main: data.weather[0].main,
-                        icon: data.weather[0].icon,
-                        desc: data.weather[0].description,
-                        windSpeed: data.wind.speed,
-                        windDeg: data.wind.deg,
-                        visibility: data.visibility,
-                        pressure: data.main.pressure,
-                        clouds: data.clouds.all,
-                    });
                     // onBgChange(data.name);
                     onLocationChange(
                         position.coords.latitude,
                         position.coords.longitude
                     );
                     setLoading(false);
-                    // switch (data.weather[0].main) {
-                    //     case "Haze":
-                    //         setWeatherIcon("CLEAR_DAY");
-                    //         break;
-                    //     case "Clouds":
-                    //         setWeatherIcon("CLOUDY");
-                    //         break;
-                    //     case "Rain":
-                    //         setWeatherIcon("RAIN");
-                    //         break;
-                    //     case "Snow":
-                    //         setWeatherIcon("SNOW");
-                    //         break;
-                    //     case "Dust":
-                    //         setWeatherIcon("WIND");
-                    //         break;
-                    //     case "Drizzle":
-                    //         setWeatherIcon("SLEET");
-                    //         break;
-                    //     case "Fog":
-                    //         setWeatherIcon("FOG");
-                    //         break;
-                    //     case "Smoke":
-                    //         setWeatherIcon("FOG");
-                    //         break;
-                    //     case "Tornado":
-                    //         setWeatherIcon("WIND");
-                    //         break;
-                    //     default:
-                    //         setWeatherIcon("CLEAR_DAY");
-                    // }
                 },
                 (err) => {
                     console.log("Error callback", err);
@@ -89,6 +36,38 @@ const CurrentLocation = () => {
             );
         }
     }, []);
+
+    useEffect(() => {
+        async function fetchData() {
+            console.log("dhefdef pos2",location)
+            const data = await fetchCurrLocation({
+                latitude: location.lat,
+                longitude: location.lon,
+            });
+            if(data?.cod != 400)
+            setLocalData({
+                lat: location.lat,
+                lon: location.lon,
+                city: data.name,
+                country: data.sys.country,
+                sunrise: data.sys.sunrise,
+                sunset: data.sys.sunset,
+                celciusTemp: data.main.temp,
+                farenheitTemp: data.main.temp * 1.8 + 32,
+                feelsLike: data.main.feels_like,
+                humidity: data.main.humidity,
+                main: data.weather[0].main,
+                icon: data.weather[0].icon,
+                desc: data.weather[0].description,
+                windSpeed: data.wind.speed,
+                windDeg: data.wind.deg,
+                visibility: data.visibility,
+                pressure: data.main.pressure,
+                clouds: data.clouds.all,
+            });
+        }
+        location?.lat && fetchData();
+    }, [location.lat, location.lon]);
 
     return (
         <>
@@ -131,9 +110,9 @@ const CurrentLocation = () => {
                         </div>
                         <Forecast />
                     </div>
-                    <div>
-                        <Info data={localData}/>
-                    </div>
+                    {localData?.country && <div>
+                        <Info data={localData} />
+                    </div>}
                 </div>
             )}
         </>

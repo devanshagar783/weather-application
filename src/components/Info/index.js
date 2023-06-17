@@ -105,14 +105,13 @@ const Info = ({ data }) => {
     useEffect(() => {
         async function fetchAqi() {
             const aqiFetchData = await fetchAirPollution(lat, lon);
-            setAqi(aqiFetchData?.list[0]);
-            console.log("aqui fetch", aqiFetchData.list[0]);
+            if (aqiFetchData?.cod != 400) setAqi(aqiFetchData?.list[0]);
         }
         fetchAqi();
     }, [lat, lon]);
 
     return (
-        <div >
+        <div>
             <div className="home-container info-container">
                 <p className="forecast-text">Todays Highlights</p>
                 <div className="forecast-row">
@@ -134,11 +133,12 @@ const Info = ({ data }) => {
             <div>
                 <p className="forecast-text">Today at</p>
                 <div className="home-container info-container forecast-container">
-                {forecastItems && forecastItems.map((item, index)=>{
-                    if(index < 8)
-                        return <ForecastData data={item} key={index} />
-                    return ""
-                })}
+                    {forecastItems &&
+                        forecastItems.map((item, index) => {
+                            if (index < 8)
+                                return <ForecastData data={item} key={index} />;
+                            return "";
+                        })}
                 </div>
             </div>
         </div>

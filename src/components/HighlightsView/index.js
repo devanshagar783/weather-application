@@ -6,7 +6,7 @@ const HighlightsView = ({ data }) => {
         <div className="highlight-item">
             <div className="highlight-title-container">
                 {data?.title}
-                {data?.aqui && <div className="aqui-type">Good</div>}
+                {data?.aqi && <div className="aqui-type">Good</div>}
             </div>
             <div className="highlight-subtext">
                 <img src={data?.icon} />
